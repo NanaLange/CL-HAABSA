@@ -39,18 +39,18 @@ The are three main files in the environment that can be run: main.py, main_cross
 
 - auxModel.py: the auxiliary feed-forward model used to compute the curriculum scores of the training data.
 
-- hyperOpt.py: implementation of HyperOpt to optimize the hyperparameters of the auxiliary feed-forward model used for curriculum learning.
+- hyperOpt.py: program for the optimization of the hyperparameters of the auxiliary feed-forward model used for curriculum learning.
 
-- sentiWordNet.py: file used to determine the SentiWordNet features for every sentence. These features can be fed into auxModel.py to obtain the curriculum scores for the instances. 
+- sentiWordNet.py: file used to determine the SentiWordNet features for every sample. These features can be fed into auxModel.py to obtain the curriculum scores for the instances. 
 
-- att_layer.py, nn_layer.py, utils.py: programs that declare additional functions used by the machine learning algorithms.
+- att_layer.py, nn_layer.py, utils.py: programs that declare additional functions that are used by the implemented machine learning algorithms.
+
+- dataReader2016.py, loadData.py: files used to transform the raw data to the required formats to be used by the different algorithms.
+
+- getBERTusingColab.py, prepareBERT.py, prepareELMo.py: files used to extract the BERT, respectively, ELMo word embeddings and prepare the final BERT, respectively, ELMo embedding matrix, training, and testing data sets. 
+
+- OntologyReasoner.py: program for the ontology reasoner.
 
 - cabascModel.py: Tensorflow implementation for the CABASC algorithm
 
-- svmModel.py: PYTHON implementation for a BoW model using a SVM.
-
-- OntologyReasoner.py: PYTHON implementation for the ontology reasoner.
-
-- dataReader2016.py, loadData.py: files used to read in the raw data and transform them to the required formats to be used by one of the algorithms.
-
-- getBERTusingColab.py, prepareBERT.py, prepareELMo.py: files used to extract the BERT, respectively, ELMo word embeddings and prepare the final BERT, respectively, ELMo embedding matrix, training, and testing data sets. 
+- svmModel.py: program for a  bag-of-words model using a Support Vector Machine.
