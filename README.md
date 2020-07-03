@@ -35,13 +35,21 @@ The are three main files in the environment that can be run: main.py, main_cross
 
 - lcrModelAlt_hierarchical_v1, lcrModelAlt_hierarchical_v2, lcrModelAlt_hierarchical_v3, and lcrModelAlt_hierarchical_v4: Tensorflow implementation for the LCR-Rot-hop algorithm with hierarchical attention. The number stands for which method for hierarchical attention is used (see HAABSA++ paper). In CL-HAABSA++, we use method 4, so lcrModelAlt_hierarchical_v4.
 
+- lcrModelAlt curr
+
+- auxModel.py: the auxiliary feed-forward model used to compute the curriculum scores of the instances.
+
+- getCurriculumHyperData.py: program that uses the curriculum scores to divide the training data in *k* buckets, for *k*=1,..,10. For every bucket of data, the data is separated in a train and an evaluation set (80-20%) and saved in new files. These files can then be used to optimize the hyperparameters for every bucket of data, using main_hyper.py.
+
+- hyperOpt.py: implementation of HyperOpt to optimize the hyperparameters of the auxiliary feed-forward model used for curriculum learning.
+
+- att_layer.py, nn_layer.py, utils.py: programs that declare additional functions used by the machine learning algorithms.
+
 - cabascModel.py: Tensorflow implementation for the CABASC algorithm
 
 - svmModel.py: PYTHON implementation for a BoW model using a SVM.
 
 - OntologyReasoner.py: PYTHON implementation for the ontology reasoner.
-
-- att_layer.py, nn_layer.py, utils.py: programs that declare additional functions used by the machine learning algorithms.
 
 - getBERTusingColab.py: file used to extract the BERT word embeddings.
 
@@ -49,7 +57,4 @@ The are three main files in the environment that can be run: main.py, main_cross
 
 - prepareELMo.py: extract the ELMo word emebddings and prepare the final ELMo embedding matrix, training and testing datasets.
 
-## Curriculum Learning Files
-Next to the files mentioned above, there are some files in CL-HAABSA that are added because of curriculum learning. These files are discussed below:
 
-- 
