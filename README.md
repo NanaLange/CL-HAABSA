@@ -57,10 +57,4 @@ The are three main files in the environment that can be run: main.py, main_cross
 
 - OntologyReasoner.py: PYTHON implementation for the ontology reasoner.
 
-- getBERTusingColab.py: file used to extract the BERT word embeddings.
-
-- prepareBERT.py: file used to prepare the final BERT embedding matrix, training and testing datasets.
-
-- prepareELMo.py: extract the ELMo word emebddings and prepare the final ELMo embedding matrix, training and testing datasets.
-
-
+- getBERTusingColab.py, prepareBERT.py, prepareELMo.py: files used to extract the BERT, respectively, ELMo word embeddings and prepare the final BERT, respectively, ELMo embedding matrix, training, and testing data sets. 
