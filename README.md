@@ -33,15 +33,21 @@ The are three main files in the environment that can be run: main.py, main_cross
 
 - lcrModelInverse.py: Tensorflow implementation for the LCR-Rot-inv algorithm.
 
-- lcrModelAlt_hierarchical_v1, lcrModelAlt_hierarchical_v2, lcrModelAlt_hierarchical_v3, and lcrModelAlt_hierarchical_v4: Tensorflow implementation for the LCR-Rot-hop algorithm with hierarchical attention. The number stands for which method for hierarchical attention is used (see HAABSA++ paper). In CL-HAABSA++, we use method 4, so lcrModelAlt_hierarchical_v4.
+- lcrModelAlt_hierarchical_v1, lcrModelAlt_hierarchical_v2, lcrModelAlt_hierarchical_v3, and lcrModelAlt_hierarchical_v4: Tensorflow implementation for the LCR-Rot-hop algorithm with hierarchical attention. The number stands for which method for hierarchical attention is used (see HAABSA++ paper). In CL-HAABSA++, we use an altered version of lcrModelAlt_hierarchical_v4, which is discussed next.
 
-- lcrModelAlt curr
+- lcrModelAlt_hierarchical_v4_trainevaltest.py: Tensorflow implementation for the LCR-Rot-hop algorithm with hierarchical attention (method 4). In contrary to the methods discussed before, this program takes as input not only train and test data, but also validation data. The train data should be split in train (80%) and validation (20%) before running this method. The validation data is needed to decide when the model has converged.
+
+- lcrModelAlt_hierarchical_v4_baby_steps.py and lcrModelAlt_hierarchical_v4_one_pass.py: Tensorflow implementation for the LCR-Rot-hop algorithm with hierarchical attention (method 4) with the *baby steps* curriculum strategy implemented. For every bucket, or combination of buckets, data, the optimal hyperparameters can be set in this file. Furthermore, the indices sorted by their curriculum scores has to be added as input. 
+
+- lcrModelAlt_hierarchical_hyper_opt.py: Tensorflow implementation for the LCR-Rot-hop algorithm with hierarchical attention (method 4) that can be used for the hyperparameter optimization of the buckets of training data. 
 
 - auxModel.py: the auxiliary feed-forward model used to compute the curriculum scores of the instances.
 
 - getCurriculumHyperData.py: program that uses the curriculum scores to divide the training data in *k* buckets, for *k*=1,..,10. For every bucket of data, the data is separated in a train and an evaluation set (80-20%) and saved in new files. These files can then be used to optimize the hyperparameters for every bucket of data, using main_hyper.py.
 
 - hyperOpt.py: implementation of HyperOpt to optimize the hyperparameters of the auxiliary feed-forward model used for curriculum learning.
+
+- sentiWordNet.py: file used to determine the SentiWordNet features for every sentence. These features can be fed into auxModel.py to obtain the curriculum scores for the instances. 
 
 - att_layer.py, nn_layer.py, utils.py: programs that declare additional functions used by the machine learning algorithms.
 
