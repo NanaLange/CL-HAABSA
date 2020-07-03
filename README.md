@@ -17,33 +17,27 @@ After completing the instructions, all the CL-HAABSA files need to be installed 
 ## Software Explanation
 The are three main files in the environment that can be run: main.py, main_cross.py, and main_hyper.py. An overview of these files and other important files is given:
 
-- main.py: program to run single in-sample and out-of-sample valdition runs. Each method can be activated by setting its corresponding boolean to True e.g. to run the *baby steps* curriculum algorithm, set runBaby_Steps = True.
+- main.py: program to run in-sample and out-of-sample validation runs of the different methods. Each method can be activated by setting its corresponding boolean to True. For instance, set runBaby_Steps = True to run the *baby steps* curriculum algorithm.
 
-- main_cross.py: similar to main.py but runs a 10-fold cross validation procedure for each method.
+- main_cross.py: program similar to main.py but for running a k-fold cross validation procedure for the chosen method.
 
-- main_hyper.py: program that performs hyperparameter optimzation for a given space of hyperparamters for each method. To change a method, change the objective and space parameters in the run_a_trial() function.
+- main_hyper.py: program to perform hyperparameter optimzation for a given space of hyperparameters for each method. The method can be changed by changing the objective and space parameters in the run_a_trial() function.
 
-- config.py: contains parameter configurations that can be changed such as: dataset_year, batch_size, iterations.
+- config.py: file that contains parameter configurations that can be changed, such as the number of buckets used for curriculum strategy and the year of the data set.
 
-- dataReader2016.py, loadData.py: files used to read in the raw data and transform them to the required formats to be used by one of the algorithms.
-
-- lcrModel.py: Tensorflow implementation for the LCR-Rot algorithm.
-
-- lcrModelAlt.py: Tensorflow implementation for the LCR-Rot-hop algorithm.
-
-- lcrModelInverse.py: Tensorflow implementation for the LCR-Rot-inv algorithm.
+- lcrModel.py, lcrModelAlt.py, lcrModelInverse.py: Tensorflow implementation for the LCR-Rot algorithm, the LCR-Rot-hop algorithm, and the LCR-Rot-inv algorithm, respectively. 
 
 - lcrModelAlt_hierarchical_v1, lcrModelAlt_hierarchical_v2, lcrModelAlt_hierarchical_v3, and lcrModelAlt_hierarchical_v4: Tensorflow implementation for the LCR-Rot-hop algorithm with hierarchical attention. The number stands for which method for hierarchical attention is used (see HAABSA++ paper). In CL-HAABSA++, we use an altered version of lcrModelAlt_hierarchical_v4, which is discussed next.
 
-- lcrModelAlt_hierarchical_v4_trainevaltest.py: Tensorflow implementation for the LCR-Rot-hop algorithm with hierarchical attention (method 4). In contrary to the methods discussed before, this program takes as input not only train and test data, but also validation data. The train data should be split in train (80%) and validation (20%) before running this method. The validation data is needed to decide when the model has converged.
+- lcrModelAlt_hierarchical_v4_trainevaltest.py: Tensorflow implementation for the LCR-Rot-hop algorithm with hierarchical attention (method 4). Different than the methods discussed before, this program takes as input not only train and test data, but also validation data. Before running this method, the train data must be split in a train (80%) and a validation (20%) set. The validation data set is needed to decide when the model has converged
 
-- lcrModelAlt_hierarchical_v4_baby_steps.py and lcrModelAlt_hierarchical_v4_one_pass.py: Tensorflow implementation for the LCR-Rot-hop algorithm with hierarchical attention (method 4) with the *baby steps* curriculum strategy implemented. For every bucket, or combination of buckets, data, the optimal hyperparameters can be set in this file. Furthermore, the indices sorted by their curriculum scores has to be added as input. 
+- lcrModelAlt_hierarchical_v4_baby_steps.py, lcrModelAlt_hierarchical_v4_one_pass.py: Tensorflow implementation for the LCR-Rot-hop algorithm with hierarchical attention (method 4) with, respectively, the *baby steps* or the *one-pass* curriculum strategy. For every bucket of data, or combination of buckets, the optimal hyperparameters can be set in this file. Furthermore, the indices sorted by their curriculum scores need to be added as input. 
 
 - lcrModelAlt_hierarchical_hyper_opt.py: Tensorflow implementation for the LCR-Rot-hop algorithm with hierarchical attention (method 4) that can be used for the hyperparameter optimization of the buckets of training data. 
 
-- auxModel.py: the auxiliary feed-forward model used to compute the curriculum scores of the instances.
+- getCurriculumHyperData.py: program that uses the curriculum scores to divide the training data in *k* buckets, for *k*=1,..,10. For every bucket of data, the data is separated in a train and an validation set (80-20%) and saved in new files. These files can then be used to optimize the hyperparameters for every bucket of data, using main_hyper.py.
 
-- getCurriculumHyperData.py: program that uses the curriculum scores to divide the training data in *k* buckets, for *k*=1,..,10. For every bucket of data, the data is separated in a train and an evaluation set (80-20%) and saved in new files. These files can then be used to optimize the hyperparameters for every bucket of data, using main_hyper.py.
+- auxModel.py: the auxiliary feed-forward model used to compute the curriculum scores of the training data.
 
 - hyperOpt.py: implementation of HyperOpt to optimize the hyperparameters of the auxiliary feed-forward model used for curriculum learning.
 
@@ -56,5 +50,7 @@ The are three main files in the environment that can be run: main.py, main_cross
 - svmModel.py: PYTHON implementation for a BoW model using a SVM.
 
 - OntologyReasoner.py: PYTHON implementation for the ontology reasoner.
+
+- dataReader2016.py, loadData.py: files used to read in the raw data and transform them to the required formats to be used by one of the algorithms.
 
 - getBERTusingColab.py, prepareBERT.py, prepareELMo.py: files used to extract the BERT, respectively, ELMo word embeddings and prepare the final BERT, respectively, ELMo embedding matrix, training, and testing data sets. 
